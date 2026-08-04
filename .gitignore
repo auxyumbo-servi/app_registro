@@ -1,0 +1,64 @@
+# Entorno virtual Python
+.venv/
+venv/
+env/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+
+# Configuración VS Code
+.vscode/
+!.vscode/settings.json
+
+# Variables privadas
+.env
+.env.*
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos temporales
+*.tmp
+*.log
+
+# Excel temporales
+~$*.xlsx
+*.xls~
+
+# PDFs generados
+*.pdf
+
+# Reportes generados
+/reportes_generados/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Migraciones temporales
+*.bak
+
+# Builds
+build/
+dist/
+*.egg-info/
+
+# Node (si usas herramientas web)
+node_modules/
+
+# Carpetas de pruebas
+.coverage
+.pytest_cache/
+
+# Secretos
+*.key
+*.pem
+
+#backup
+.backup/

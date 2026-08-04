@@ -1,0 +1,28 @@
+[user]
+    name = Steeven
+    email = auxyumbo@gmail.com
+
+[core]
+    editor = code --wait
+    autocrlf = true
+    ignorecase = false
+
+[init]
+    defaultBranch = develop
+
+[color]
+    ui = auto
+
+[pull]
+    rebase = false
+
+[credential]
+    helper = manager
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    cm = commit -m
+    lg = log --oneline --graph --decorate --all
+    last = log -1 HEAD
