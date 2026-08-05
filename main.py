@@ -1,20 +1,13 @@
+# main.py
+
 from nicegui import ui
 
-
-from core.database import create_tables
-
-
-from modules.products.views import products_page
+from modules.cliente.views import cliente_page
+from modules.registros.views import registro_page
 
 
-
-create_tables()
-
-
-
-ui.page("/")(
-    products_page
-)
+ui.page("/inicio")(cliente_page)
+ui.page("/registros")(registro_page)
 
 
 

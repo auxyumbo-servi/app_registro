@@ -15,6 +15,10 @@ controller = ProductController()
 def products_page():
 
 
+    expiration = ui.date(
+        "Fecha vencimiento"
+    )
+
     ui.label(
         "Registro productos"
     ).classes(
@@ -36,10 +40,6 @@ def products_page():
         "Precio"
     )
 
-
-    expiration = ui.date(
-        "Fecha vencimiento"
-    )
 
 
     category = ui.input(
@@ -69,13 +69,13 @@ def products_page():
 
         controller.save_product(
 
+            expiration.value,
+
             name.value,
 
             int(quantity.value),
 
             float(price.value),
-
-            expiration.value,
 
             category.value
 

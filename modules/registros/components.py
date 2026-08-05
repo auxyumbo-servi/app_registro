@@ -58,4 +58,3 @@ def product_table(rows):
         rows=data
 
     )
-
