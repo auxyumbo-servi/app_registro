@@ -2,24 +2,21 @@ from nicegui import ui
 
 from datetime import date
 
-from .controllers import ProductController
+from .controllers import RegistroController
 
-from .components import product_table
+from .components import registro_table
 from styles.buttons import *
+from styles.header import *
 
 
 
-controller = ProductController()
+controller = RegistroController()
 
 
 def registro_page():
 
+    header('Registro de aforo')
 
-    ui.label(
-        "Registro de aforo"
-    ).classes(
-        "text-2xl"
-    )
 
     dia = ui.date_input(
         "Fecha aforo"
@@ -113,7 +110,7 @@ def registro_page():
 
         with table:
 
-            product_table(
+            registro_table(
                 controller.products()
             )
 

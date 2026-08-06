@@ -1,9 +1,9 @@
 from core.database import SessionLocal
 
-from models.product import Product
+from models.registro import Registro
 
 
-class ProductService:
+class RegistroService:
 
 
     def create(self, data):
@@ -11,26 +11,24 @@ class ProductService:
         db = SessionLocal()
 
 
-        product = Product(
-            name=data.name,
-            quantity=data.quantity,
-            price=data.price,
-            expiration_date=data.expiration_date,
-            category=data.category
+        registro = Registro(
+            fecha=data.fecha,
+            nombre=data.nombre_id,
+            aforo=data.aforo
         )
 
 
-        db.add(product)
+        db.add(registro)
 
         db.commit()
 
-        db.refresh(product)
+        db.refresh(registro)
 
 
         db.close()
 
 
-        return product
+        return registro
 
 
 
@@ -38,9 +36,9 @@ class ProductService:
 
         db = SessionLocal()
 
-        products = db.query(Product).all()
+        registros = db.query(Registro).all()
 
         db.close()
 
 
-        return products
+        return registros

@@ -1,37 +1,32 @@
-from .schemas import ProductCreate
-from .services import ProductService
+from .schemas import RegistroCreate
+from .services import RegistroService
 
 
-class ProductController:
+class RegistroController:
 
 
     def __init__(self):
 
-        self.service = ProductService()
+        self.service = RegistroService()
 
 
 
     def save_product(
         self,
-        name,
-        quantity,
-        price,
-        expiration_date,
-        category
-    ):
+        fecha,
+        nombre,
+        aforo
+):
 
 
-        data = ProductCreate(
+        data = RegistroCreate(
 
-            name=name,
+            fecha=fecha,
 
-            quantity=quantity,
+            nombre=nombre,
 
-            price=price,
+            aforo=aforo,
 
-            expiration_date=expiration_date,
-
-            category=category
         )
 
 

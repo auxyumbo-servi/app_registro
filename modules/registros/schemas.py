@@ -2,14 +2,11 @@ from pydantic import BaseModel
 from datetime import date
 
 
-class ProductCreate(BaseModel):
+class RegistroCreate(BaseModel):
 
-    name: str
+    fecha: date
 
-    quantity: int
+    nombre: str
 
-    price: float
+    aforo: str
 
-    expiration_date: date
-
-    category: str

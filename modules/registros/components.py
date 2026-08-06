@@ -1,7 +1,7 @@
 from nicegui import ui
 
 
-def product_table(rows):
+def registro_table(rows):
 
 
     data=[]

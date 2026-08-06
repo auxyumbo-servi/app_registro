@@ -4,9 +4,9 @@ from sqlalchemy.orm import relationship
 from models.base import BaseModel
 
 
-class Usuario(BaseModel):
+class Cliente(BaseModel):
 
-    __tablename__ = "usuarios"
+    __tablename__ = "clientes"
 
 
     nombre: Mapped[str]
@@ -15,7 +15,7 @@ class Usuario(BaseModel):
     contrato: Mapped[str]
 
 
-    transacciones: Mapped[list["Transaccion"]] = relationship(
-        "Transaccion",
-        back_populates="usuario"
+    registro: Mapped[list["Registro"]] = relationship(
+        "Registro",
+        back_populates="cliente"
     )
