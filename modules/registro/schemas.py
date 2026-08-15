@@ -4,12 +4,9 @@ from datetime import date
 
 class RegistroCreate(BaseModel):
 
-    name: str
+    fecha: date
 
-    quantity: int
+    nombre: str
 
-    price: float
+    aforo: str
 
-    expiration_date: date
-
-    category: str
