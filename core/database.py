@@ -18,3 +18,6 @@ Base = declarative_base()
 
 def create_tables():
     Base.metadata.create_all(engine)
+
+def get_session():
+    return SessionLocal()

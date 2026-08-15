@@ -6,7 +6,7 @@ class ProductCreate(BaseModel):
 
     name: str
 
-    quantity: int
+    quantity: str
 
     price: float
 

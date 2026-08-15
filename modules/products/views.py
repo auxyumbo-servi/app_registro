@@ -69,11 +69,11 @@ def products_page():
 
         controller.save_product(
 
-            expiration.value,
+            date.fromisoformat(expiration.value),
 
             name.value,
 
-            int(quantity.value),
+            str(quantity.value),
 
             float(price.value),
 

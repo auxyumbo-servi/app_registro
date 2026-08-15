@@ -1,14 +1,30 @@
-# main.py
-
 from nicegui import ui
 
-from modules.cliente.views import cliente_page
-from modules.registros.views import registro_page
+from core.database import engine
+from models.base import Base
+
+# Importar modelos para que SQLAlchemy los registre
+from models.cliente import Cliente
+from models.recipiente import Recipiente
+from models.registro import Registro
+from models.detalle_registro import DetalleRegistro
+
+from modules.cliente.views import cliente_view
+from modules.registro.views import registro_view
 
 
-ui.page("/inicio")(cliente_page)
-ui.page("/registros")(registro_page)
+# Crear las tablas
+Base.metadata.create_all(bind=engine)
 
 
+@ui.page("/")
+def index():
 
+    cliente_view()
+
+@ui.page("/registro")
+def registro():
+
+    registro_view()
+    
 ui.run()
