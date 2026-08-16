@@ -1,29 +1,22 @@
-from datetime import datetime
-from decimal import Decimal
-
-from pydantic import BaseModel, Field
-
-
-class RegistroDetalleCreate(BaseModel):
-    producto_id: int
-
-    cantidad: int = Field(
-        gt=0,
-    )
+from pydantic import BaseModel, EmailStr, Field
 
 
 class RegistroCreate(BaseModel):
-    cliente_id: int
-
-    detalles: list[RegistroDetalleCreate] = Field(
+    nombre: str = Field(
         min_length=1,
+        max_length=150,
     )
+
+    placa: str | None = None
+    
+
+
 
 
 class RegistroResponse(BaseModel):
     id: int
-    cliente_id: int
-    fecha: datetime
+    nombre: str
+    placa: str | None
 
     model_config = {
         "from_attributes": True

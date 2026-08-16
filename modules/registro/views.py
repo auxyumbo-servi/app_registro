@@ -5,7 +5,7 @@ from nicegui import ui
 from core.database import get_session
 from schemas.registro import (
     RegistroCreate,
-    RegistroDetalleCreate,
+    RegistroResponse
 )
 from modules.registro.service import crear_registro
 

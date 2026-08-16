@@ -10,6 +10,7 @@ from models.registro import Registro
 from models.detalle_registro import DetalleRegistro
 
 from modules.cliente.views import cliente_view
+from modules.recipiente.views import recipiente_view
 from modules.registro.views import registro_view
 
 
@@ -22,9 +23,14 @@ def index():
 
     cliente_view()
 
-@ui.page("/registro")
+@ui.page("/recipientes")
+def recipiente():
+
+    recipiente_view()
+
+@ui.page("/registros")
 def registro():
 
     registro_view()
-    
+
 ui.run()

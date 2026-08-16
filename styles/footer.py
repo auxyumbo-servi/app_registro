@@ -3,7 +3,8 @@ from nicegui import ui
 
 MENU = [
     ('INICIO', '/'),
-    ('AFOROS', '/aforos'),
+    ('REGISTROS', '/registros'),
+    ('RECIPENTES', '/recipientes'),
     ('CLIENTES', '/clientes'),
     ('TARIFAS', '/tarifas'),
     

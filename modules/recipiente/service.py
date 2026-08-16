@@ -12,8 +12,7 @@ def crear_recipiente(
 
     recipiente = Recipiente(
         nombre=data.nombre,
-        precio=data.precio,
-        stock=data.stock,
+        equivalencia=data.equivalencia,
     )
 
     session.add(recipiente)
