@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from models.base import Base
+from core.database import Base
 
 
 if TYPE_CHECKING:
@@ -22,12 +22,6 @@ class Registro(Base):
 
     cliente_id: Mapped[int] = mapped_column(
         ForeignKey("cliente.id"),
-        nullable=False,
-    )
-
-    fecha: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow,
         nullable=False,
     )
 

@@ -1,21 +1,26 @@
-from sqlalchemy.orm import Session
-
 from models.cliente import Cliente
-from schemas.cliente import ClienteCreate
+from modules.cliente.repository import ClienteRepository
 
+repository = ClienteRepository
 
-def crear_cliente(
-    session: Session,
-    data: ClienteCreate,
-) -> Cliente:
+class ClienteService:
 
-    cliente = Cliente(
-        nombre=data.nombre,
-        contrato=data.contrato,
-    )
+    def crear_cliente (nombre, contrato):
 
-    session.add(cliente)
-    session.commit()
-    session.refresh(cliente)
+        cliente = Cliente(
+            nombre=nombre,
+            contrato=contrato
+        )
 
-    return cliente
+        return repository.crear_cliente(cliente)
+
+    def obtener_clientes():
+        clientes = repository.obtener_clientes()
+        opciones = {n.id: n.nombre
+        for n in clientes
+        }
+        return repository.obtener_clientes
+
+    def obtener_recipientes():
+        return repository.obtener_recipientes
+

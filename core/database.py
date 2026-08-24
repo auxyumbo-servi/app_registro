@@ -1,6 +1,6 @@
 from pathlib import Path
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 BASE_DIR = Path(__file__).parent
 
@@ -10,11 +10,15 @@ DB_PATH.parent.mkdir(exist_ok=True)
 
 DATABASE_URL = f"sqlite:///{DB_PATH}"
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL,
+                        echo=True)
 
-SessionLocal = sessionmaker(bind=engine)
+SessionLocal = sessionmaker(bind=engine,
+                            autoflush=False,
+                            autocommit=False)
 
-Base = declarative_base()
+class Base (DeclarativeBase):
+    pass
 
 def create_tables():
     Base.metadata.create_all(engine)

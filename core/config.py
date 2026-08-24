@@ -1,14 +1,23 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pathlib import Path
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 
+BASE_DIR = Path(__file__).parent
 
-class Settings(BaseSettings):
-    database_url: str = "sqlite:///./app.db"
+DB_PATH = BASE_DIR / "Historico.db"
 
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        extra="ignore",
-    )
+DB_PATH.parent.mkdir(exist_ok=True)
 
+DATABASE_URL = f"sqlite:///{DB_PATH}"
 
-settings = Settings()
+engine = create_engine(DATABASE_URL)
+
+SessionLocal = sessionmaker(bind=engine)
+
+Base = declarative_base()
+
+def create_tables():
+    Base.metadata.create_all(engine)
+
+def get_session():
+    return SessionLocal()

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey, Numeric
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from models.base import Base
+from core.database import Base
 
 
 if TYPE_CHECKING:
@@ -34,7 +34,7 @@ class DetalleRegistro(Base):
         nullable=False,
     )
 
-    precio_unitario: Mapped[Decimal] = mapped_column(
+    tarifa: Mapped[Decimal] = mapped_column(
         Numeric(12, 2),
         nullable=False,
     )

@@ -1,6 +1,6 @@
 from core.database import SessionLocal
 
-from models.product import Product
+from models.tarifa import Tarifa
 
 
 class ProductService:
@@ -11,7 +11,7 @@ class ProductService:
         db = SessionLocal()
 
 
-        product = Product(
+        tarifa = Tarifa(
             name=data.name,
             quantity=data.quantity,
             price=data.price,
@@ -20,17 +20,17 @@ class ProductService:
         )
 
 
-        db.add(product)
+        db.add(Tarifa)
 
         db.commit()
 
-        db.refresh(product)
+        db.refresh(tarifa)
 
 
         db.close()
 
 
-        return product
+        return tarifa
 
 
 
@@ -38,9 +38,9 @@ class ProductService:
 
         db = SessionLocal()
 
-        products = db.query(Product).all()
+        tarifas = db.query(Tarifa).all()
 
         db.close()
 
 
-        return products
+        return tarifas
