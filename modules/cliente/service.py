@@ -1,26 +1,37 @@
 from models.cliente import Cliente
 from modules.cliente.repository import ClienteRepository
 
-repository = ClienteRepository
 
 class ClienteService:
 
-    def crear_cliente (nombre, contrato):
+    repository = ClienteRepository()
+
+    @staticmethod
+    def crear_cliente(nombre, contrato):
+        
+        if not nombre:
+            raise ValueError ('Nombre Obligatorio')
 
         cliente = Cliente(
             nombre=nombre,
             contrato=contrato
         )
+        return ClienteService.repository.crear_cliente(cliente)
 
-        return repository.crear_cliente(cliente)
-
+    @staticmethod
     def obtener_clientes():
-        clientes = repository.obtener_clientes()
-        opciones = {n.id: n.nombre
-        for n in clientes
-        }
-        return repository.obtener_clientes
+        return ClienteService.repository.obtener_clientes()
 
-    def obtener_recipientes():
-        return repository.obtener_recipientes
+    @staticmethod
+    def obtener_opciones():
+        clientes = ClienteService.repository.obtener_clientes()
+
+        return {
+            n.id: n.nombre
+            for n in clientes
+        }
+
+    @staticmethod
+    def obtener_cliente(cliente_id):
+        return ClienteService.repository.obtener_cliente(cliente_id)
 

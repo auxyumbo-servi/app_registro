@@ -1,22 +1,37 @@
-from sqlalchemy import select
-from sqlalchemy.orm import Session
-
 from models.recipiente import Recipiente
-from schemas.recipiente import RecipienteCreate
+from modules.recipiente.repository import RecipienteRepository
 
 
-def crear_recipiente(
-    session: Session,
-    data: RecipienteCreate,
-) -> Recipiente:
+class RecipienteService:
 
-    recipiente = Recipiente(
-        nombre=data.nombre,
-        equivalencia=data.equivalencia,
-    )
+    repository = RecipienteRepository()
 
-    session.add(recipiente)
-    session.commit()
-    session.refresh(recipiente)
+    @staticmethod
+    def crear_recipiente(nombre, equivalencia):
+        
+        if not nombre:
+            raise ValueError ('Nombre Obligatorio')
 
-    return recipiente
+        recipiente = Recipiente(
+            nombre=nombre,
+            equivalencia=equivalencia
+        )
+        return RecipienteService.repository.crear_recipiente(recipiente)
+
+    @staticmethod
+    def obtener_recipientes():
+        return RecipienteService.repository.obtener_recipientes()
+
+    @staticmethod
+    def obtener_opciones():
+        recipientes = RecipienteService.repository.obtener_recipientes()
+
+        return {
+            n.id: n.nombre
+            for n in recipientes
+        }
+
+    @staticmethod
+    def obtener_recipiente(recipiente_id):
+        return RecipienteService.repository.obtener_recipiente(recipiente_id)
+

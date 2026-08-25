@@ -1,19 +1,22 @@
 from modules.cliente.service import ClienteService
 
-service = ClienteService
-
 class ClienteController:
 
+    @staticmethod
     def crear_cliente(nombre, contrato):
-        return service.crear_cliente(
+        return ClienteService.crear_cliente(
             nombre,
             contrato
         )
 
-    def obtener_clientes():
-        return
-    service.obtener_clientes()
-    
-    def obtener_recipientes():
-        return
-    service.obtener_recipientes()
+    @staticmethod
+    def clientes():
+        return ClienteService.obtener_clientes()
+
+    @staticmethod
+    def opciones_clientes():
+        return ClienteService.obtener_opciones()
+
+    @staticmethod
+    def obtener_cliente(cliente_id):
+        return ClienteService.obtener_cliente(cliente_id)

@@ -5,9 +5,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.database import Base
 
-
+'''
 if TYPE_CHECKING:
-    from models.registro import Registro
+    from models.registro import Registro'''
 
 
 class Cliente(Base):
@@ -24,11 +24,11 @@ class Cliente(Base):
     )
 
     contrato: Mapped[str | None] = mapped_column(
-        String(150),
+        String(50),
         nullable=True,
     )
 
-    registros: Mapped[list["Registro"]] = relationship(
+'''    registros: Mapped[list["Registro"]] = relationship(
         back_populates="cliente",
         cascade="all, delete-orphan",
-    )
+    )'''

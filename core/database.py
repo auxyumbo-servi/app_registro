@@ -4,7 +4,7 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 BASE_DIR = Path(__file__).parent
 
-DB_PATH = BASE_DIR / "Historico.db"
+DB_PATH = BASE_DIR / "testing.db"
 
 DB_PATH.parent.mkdir(exist_ok=True)
 
