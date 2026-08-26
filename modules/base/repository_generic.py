@@ -9,7 +9,6 @@ T = TypeVar("T")
 
 
 class GenericRepository(Generic[T]):
-
     model: Type[T]
 
     @classmethod
@@ -26,7 +25,8 @@ class GenericRepository(Generic[T]):
         with SessionLocal() as session:
             stmt = (
                 select(cls.model)
-                .order_by(cls.model.id.desc())
+                .order_by(cls.model.id.asc())
+                .limit(5)
             )
 
             return session.scalars(stmt).all()
@@ -34,12 +34,13 @@ class GenericRepository(Generic[T]):
     @classmethod
     def obtener_por_id(
         cls,
-        entity_id: int
+        entity_id: int,
     ) -> T | None:
 
         with SessionLocal() as session:
-            stmt = select(cls.model).where(
-                cls.model.id == entity_id
+            stmt = (
+                select(cls.model)
+                .where(cls.model.id == entity_id)
             )
 
             return session.scalars(stmt).first()
@@ -48,13 +49,13 @@ class GenericRepository(Generic[T]):
     def actualizar(
         cls,
         entity_id: int,
-        datos: dict
+        datos: dict,
     ) -> T | None:
 
         with SessionLocal() as session:
-
-            stmt = select(cls.model).where(
-                cls.model.id == entity_id
+            stmt = (
+                select(cls.model)
+                .where(cls.model.id == entity_id)
             )
 
             entity = session.scalars(stmt).first()
@@ -73,13 +74,13 @@ class GenericRepository(Generic[T]):
     @classmethod
     def eliminar(
         cls,
-        entity_id: int
+        entity_id: int,
     ) -> bool:
 
         with SessionLocal() as session:
-
-            stmt = select(cls.model).where(
-                cls.model.id == entity_id
+            stmt = (
+                select(cls.model)
+                .where(cls.model.id == entity_id)
             )
 
             entity = session.scalars(stmt).first()
@@ -95,13 +96,16 @@ class GenericRepository(Generic[T]):
     @classmethod
     def existe(
         cls,
-        entity_id: int
+        entity_id: int,
     ) -> bool:
 
         with SessionLocal() as session:
-
-            stmt = select(cls.model).where(
-                cls.model.id == entity_id
+            stmt = (
+                select(cls.model)
+                .where(cls.model.id == entity_id)
             )
 
-            return session.scalars(stmt).first() is not None
+            return (
+                session.scalars(stmt).first()
+                is not None
+            )
