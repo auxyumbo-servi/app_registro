@@ -1,34 +1,53 @@
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from decimal import Decimal
+from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Numeric
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from models.base import BaseModel
+from core.database import Base
 
 
-class DetalleRegistro(BaseModel):
+if TYPE_CHECKING:
+    from models.registro import Registro
+    from models.recipiente import Recipiente
 
-    __tablename__ = "detella_registro"
-    #registro_id--> models/registro
+
+class DetalleRegistro(Base):
+    __tablename__ = "detalle_registro"
+
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        autoincrement=True,
+    )
+
     registro_id: Mapped[int] = mapped_column(
-        ForeignKey(
-            "registro.id"
-        )
-    )
-    #recipiente --> models/recipiente
-    recipiente: Mapped[int]
-
-    cantidad: Mapped[float]#detalle
-
-    observacion: Mapped[str]#detalle
-
-
-    registros: Mapped["Registro"] = relationship(
-        "Registro",
-        back_populates="detalles"
+        ForeignKey("registro.id"),
+        nullable=False,
     )
 
+    recipiente_id: Mapped[int] = mapped_column(
+        ForeignKey("recipiente.id"),
+        nullable=False,
+    )
 
+    cantidad: Mapped[int] = mapped_column(
+        nullable=False,
+    )
 
+    tarifa: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2),
+        nullable=False,
+    )
 
+    subtotal: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2),
+        nullable=False,
+    )
+
+    registro: Mapped["Registro"] = relationship(
+        back_populates="detalles",
+    )
+
+    recipiente: Mapped["Recipiente"] = relationship(
+        back_populates="detalles",
+    )

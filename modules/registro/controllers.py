@@ -11,22 +11,27 @@ class RegistroController:
 
 
 
-    def save_product(
+    def save_registro(
         self,
-        fecha,
-        nombre,
-        aforo
-):
+        dia,
+        cliente,
+        cantidad,
+        recipiente,
+        observacion
+    ):
 
 
         data = RegistroCreate(
 
-            fecha=fecha,
+            cliente=cliente,
 
-            nombre=nombre,
+            cantidad=cantidad,
 
-            aforo=aforo,
+            recipiente=recipiente,
 
+            dia=dia,
+
+            observacion=observacion
         )
 
 
@@ -34,6 +39,6 @@ class RegistroController:
 
 
 
-    def products(self):
+    def registros(self):
 
         return self.service.get_all()

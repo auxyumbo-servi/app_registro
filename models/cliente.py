@@ -1,21 +1,34 @@
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import relationship
+from typing import TYPE_CHECKING
 
-from models.base import BaseModel
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from core.database import Base
 
-class Cliente(BaseModel):
-
-    __tablename__ = "clientes"
-
-
-    nombre: Mapped[str]
+'''
+if TYPE_CHECKING:
+    from models.registro import Registro'''
 
 
-    contrato: Mapped[str]
+class Cliente(Base):
+    __tablename__ = "cliente"
 
-
-    registro: Mapped[list["Registro"]] = relationship(
-        "Registro",
-        back_populates="cliente"
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        autoincrement=True,
     )
+
+    nombre: Mapped[str] = mapped_column(
+        String(150),
+        nullable=False,
+    )
+
+    contrato: Mapped[str | None] = mapped_column(
+        String(50),
+        nullable=True,
+    )
+
+'''    registros: Mapped[list["Registro"]] = relationship(
+        back_populates="cliente",
+        cascade="all, delete-orphan",
+    )'''

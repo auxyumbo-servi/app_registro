@@ -1,26 +1,37 @@
 from nicegui import ui
 
-from core.database import create_tables
-
-from modules.products.views import products_page
-from modules.registros.views import registro_page
-from modules.produccion.views import produccion_page
-from modules.cliente.views import cliente_page
+from schemas.helper import procesar_tab
 
 
-create_tables()
+@ui.page("/")
+def usuario_view():
+    nombre = ui.input("Campo")
+
+    id_input = ui.number(
+        label="ID del usuario",
+        min=1,
+        precision=0,
+    )
+    date = ui.input(
+        label="Fecha"
+    )
+    def obtener_por_id():
+        print("Buscando usuario...")
+
+    def crear():
+        print("Creando usuario...")
+
+    nombre.on(
+        "keydown",
+        lambda e: procesar_tab(
+            e,
+            campo_origen=nombre,
+            campo_destino=date,
+            funcion_1=obtener_por_id,
+            funcion_2=crear,
+            tiempo=.5,
+        )
+    )
 
 
-
-ui.page("/")(
-    products_page
-)
-ui.page("/registros")(
-    registro_page
-)
-ui.page("/produccion")(
-    produccion_page
-)
-ui.page("/cliente")(
-    cliente_page
-)
+ui.run()

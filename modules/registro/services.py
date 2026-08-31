@@ -12,9 +12,11 @@ class RegistroService:
 
 
         registro = Registro(
-            fecha=data.fecha,
-            nombre=data.nombre_id,
-            aforo=data.aforo
+            cliente=data.cliente,
+            cantidad=data.cantidad,
+            recipiente=data.recipiente,
+            dia=data.dia,
+            observacion=data.observacion
         )
 
 
@@ -28,7 +30,7 @@ class RegistroService:
         db.close()
 
 
-        return registro
+        return Registro
 
 
 

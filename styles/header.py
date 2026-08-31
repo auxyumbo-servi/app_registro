@@ -1,6 +1,6 @@
 from nicegui import ui
 
-def header(text):
+def header(titulo):
     with ui.header().props(
         """
         elevated
@@ -8,4 +8,4 @@ def header(text):
         """
     ).classes('bg-yellow-300 text-black'):
 
-        ui.label(text=text)
+        ui.label(text=titulo).classes('text-h4 font-bold')
