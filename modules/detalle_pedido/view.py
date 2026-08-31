@@ -63,6 +63,27 @@ class Pedidoview:
         # ==========================================================
         # AGREGAR PRODUCTO
         # ==========================================================
+        def agregar_recipientes():
+
+            recipiente_id = recipiente_input.value
+            cantidad = cantidad_input.value
+
+            if recipiente_id is None:
+                ui.notify(
+                    "Seleccione un producto",
+                    type="warning",
+                )
+                return
+            recipiente = ProductoController.obtener(
+                            int(recipiente_id)
+                        )
+            if recipiente is None:
+                            ui.notify(
+                                "Producto no encontrado",
+                                type="negative",
+                            )
+                            return
+            pass
 
         def agregar_producto():
 

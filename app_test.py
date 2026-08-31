@@ -10,7 +10,7 @@ from modules.usuario.usuario_view import UsuarioView
 
 
 @ui.page('/')
-def usuarios():
+def pedidos():
     view = Pedidoview
     view.pedido_view()
 

@@ -11,7 +11,7 @@ DB_PATH.parent.mkdir(exist_ok=True)
 DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 engine = create_engine(DATABASE_URL,
-                        echo=True)
+                        echo=False)
 
 SessionLocal = sessionmaker(bind=engine,
                             autoflush=False,

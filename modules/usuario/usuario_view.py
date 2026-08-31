@@ -1,7 +1,14 @@
 from nicegui import ui
 
+import time
+
 from .usuario_controller import UsuarioController
 from models.usuario import Usuario
+from schemas.helper import focus
+
+contador_tab = 0
+ultimo_tab = 0
+
 
 class UsuarioView:
     @ui.page("/usuarios")
@@ -24,7 +31,7 @@ class UsuarioView:
             email_input = ui.input(
                 label="email",
                 
-            )
+            )            
 
         # ==========================================================
         # TABLA
@@ -268,6 +275,8 @@ class UsuarioView:
                 precision=0,
             )
 
+            campo = ui.input("Campo")
+
             ui.button(
                 "Buscar",
                 on_click=obtener_por_id,
@@ -303,6 +312,35 @@ class UsuarioView:
 
         # ==========================================================
         # CARGA INICIAL
-        # ==========================================================
+        # =========================================================
 
+        
+        def procesar_tab(e):
+            global contador_tab, ultimo_tab
+
+            ahora = time.monotonic()
+
+            # Si pasó más de 500 ms, empezamos nuevamente
+            if ahora - ultimo_tab > 2:
+                contador_tab = 0
+
+            contador_tab += 1
+            ultimo_tab = ahora
+
+            if contador_tab == 1:
+                obtener_por_id()
+                
+
+            elif contador_tab == 2:
+                crear()
+                contador_tab = 0        
+                focus('id_input')
+
+        campo.on(
+            'keydown',
+            lambda e: procesar_tab(e)
+            if e.args.get('key') == 'Tab'
+            else None
+        )  
+        
         cargar_usuarios()

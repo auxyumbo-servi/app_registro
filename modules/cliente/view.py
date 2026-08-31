@@ -1,6 +1,7 @@
 from nicegui import ui
 from modules.cliente.controller import ClienteController
 from styles.footer import navbar
+import time
 
 
 
@@ -49,5 +50,4 @@ class ClienteView:
                         "Guardar Cliente",
                         on_click=guardar_cliente,
                     ).classes("w-full")
-            
         navbar()
